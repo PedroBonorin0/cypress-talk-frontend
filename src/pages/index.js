@@ -1,15 +1,17 @@
+import 'dotenv/config';
 import { useEffect, useState } from "react";
 import TodoInput from "./todo-components/todoInput";
 import TodoList from "./todo-components/todoList";
 import axios from 'axios';
 
-const secretUrl = 'http://localhost:3001/api';
+const secretUrl = `${process.env.NEXT_PUBLIC_API_URL}/api`;
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const [todosList, setTodosList] = useState([]);
-
+  
   useEffect(() => {
+    console.log(secretUrl);
     fetchTodos();
   }, []);
 
