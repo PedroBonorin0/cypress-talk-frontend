@@ -18,15 +18,17 @@ export default function TodoInput({handleSubmit}) {
   }
 
   return (
-    <form className="flex align-middle justify-center mb-4">
+    <form className="flex align-middle justify-center mt-8 w-full">
       <input
         name="todo" value={input} onChange={handleChange} placeholder="Type new Todo"
-        className="outline-none border-b border-violet-700 mr-2 h-8 px-2 bg-slate-100"
+        data-cy="todo-input"
+        className="outline-none border-2 border-b-4 rounded-md border-[#7C95EB] mr-2 h-10 px-2 bg-white w-3/4 shadow-md opacity-85"
       />
       <button
         type="submit" onClick={(e) => submitEvent(e)}
-        className="bg-violet-700 text-white h-8 w-16 text-lg"
-      >New</button>
+        data-cy="create-todo-btn"
+        className="bg-[#7C95EB] text-white rounded-full w-1/4 leading- text-3xl line hover:bg-[#6C82CA] shadow-md"
+      >&#43;</button>
     </form>
   )
 }

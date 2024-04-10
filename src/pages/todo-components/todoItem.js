@@ -1,11 +1,13 @@
 export default function TodoItem(props) {
   return (
-    <div className="flex items-center justify-between py-2 mt-2 w-full h-8 pl-4 bg-slate-200">
-      <h2 className="text-lg">{props.todo.name}</h2>
+    <div className="bg-white flex items-center justify-between p-2 mb-2 w-full h-12 shadow-md rounded-md"
+      data-cy={`todo-item-${props.todo.name}`}
+    >
+      <h2 className="text-lg opacity-85">{props.todo.name}</h2>
       <button
         onClick={() => props.handleDelete(props.todo)}
-        className="w-8 h-8 bg-red-500 text-white"  
-      >X</button>
+        className="w-8 h-8 text-white rounded-full text-2xl bg-[#f68686] hover:bg-[#E97E7E] content-center"
+      >&#215;</button>
     </div>
   )
 }
