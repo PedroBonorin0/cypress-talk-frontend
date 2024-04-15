@@ -2,8 +2,11 @@ import 'dotenv/config';
 import { useEffect, useState } from "react";
 import TodoInput from "./todo-components/todoInput";
 import TodoList from "./todo-components/todoList";
+import NoTodos from './todo-components/noTodos';
 import axios from 'axios';
 import icon from './images/Icon.png'
+
+const USERNAME = 'PedroBonorino';
 
 const secretUrl = `${process.env.NEXT_PUBLIC_API_URL}/api`;
 const imgSize = '120px';
@@ -20,7 +23,7 @@ export default function Home() {
   const fetchTodos = async () => {
     setLoaded(false);
     try {
-      const res = await axios.get(`${secretUrl}/todos`);
+      const res = await axios.get(`${secretUrl}/todos/${USERNAME}`);
       setTodosList(res.data);
     } catch (error) {
       console.log(error);
@@ -33,11 +36,11 @@ export default function Home() {
     setLoaded(false);
 
     try {
-      await createTodo(todo);
-
-      fetchTodos();
+      await axios.post(`${secretUrl}/todos`, { name: todo, user: USERNAME });
     } catch (error) {
-      console.log(error); 
+      console.log(error);
+    } finally {
+      fetchTodos();
     }
   };
 
@@ -46,20 +49,10 @@ export default function Home() {
 
     try {
       await axios.delete(`${secretUrl}/todos/${todo._id}`);
-      fetchTodos();
     } catch (error) {
       console.log(error);
-    }
-  }
-
-  const createTodo = async (name) => {
-    setLoaded(false);
-
-    try {
-      await axios.post(`${secretUrl}/todos`, { name });
+    } finally {
       fetchTodos();
-    } catch (error) {
-      console.log(error);
     }
   }
 
