@@ -22,7 +22,7 @@ export default function TodoInput({handleSubmit}) {
       <input
         name="todo" value={input} onChange={handleChange} placeholder="Type new Todo"
         data-cy="todo-input"
-        className="outline-none border-2 border-b-4 rounded-md border-[#7C95EB] mr-2 h-10 px-2 bg-white w-3/4 shadow-md opacity-85"
+        className="outline-none border-2 border-b-4 rounded-md border-[#7C95EB] mr-2 h-10 px-2 text-zinc-800 bg-white w-3/4 shadow-md opacity-85"
       />
       <button
         type="submit" onClick={(e) => submitEvent(e)}

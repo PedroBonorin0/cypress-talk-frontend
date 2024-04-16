@@ -2,14 +2,13 @@ import 'dotenv/config';
 import { useEffect, useState } from "react";
 import TodoInput from "./todo-components/todoInput";
 import TodoList from "./todo-components/todoList";
-import NoTodos from './todo-components/noTodos';
 import axios from 'axios';
 import icon from './images/Icon.png'
+import Image from 'next/image';
 
 const USERNAME = 'PedroBonorino';
 
 const secretUrl = `${process.env.NEXT_PUBLIC_API_URL}/api`;
-const imgSize = '120px';
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -57,26 +56,28 @@ export default function Home() {
   }
 
   return (
-    <main
-      className="flex flex-col justify-start items-center mt-20 p-1 mx-auto w-1/3 text-[#606060] font-sans"
-    >
-      <div className="flex items-center justify-between w-full">
-        <h1 className="text-5xl">Rockers
-          <strong className="block font-bold">To do List</strong>
-        </h1>
-        <img src={icon.src}  width={imgSize} />
+    <main className='bg-slate-800 min-h-screen w-screen m-0 p-0'>
+      <div
+        className="flex flex-col justify-start items-center pt-20 px-1 mx-auto w-1/3 text-slate-100 font-sans"
+      >
+        <div className="flex items-center justify-between w-full">
+          <h1 className="text-5xl">Rockers
+            <strong className="block font-bold">To do List</strong>
+          </h1>
+          <Image src={icon.src} width={120} height={120} alt="img" />
+        </div>
+        <TodoInput handleSubmit={handleCreate}/>
+        {
+          !loaded && (
+            <h1 className="mt-8 text-5xl">Loading...</h1>
+          )
+        }
+        {
+          loaded && (
+            <TodoList todosList={todosList} handleDelete={handleDelete}/>
+          )
+        }
       </div>
-      <TodoInput handleSubmit={handleCreate}/>
-      {
-        !loaded && (
-          <h1 className="mt-8 text-5xl">Loading...</h1>
-        )
-      }
-      {
-        loaded && (
-          <TodoList todosList={todosList} handleDelete={handleDelete}/>
-        )
-      }
     </main>
   );
 }

@@ -1,6 +1,6 @@
 export default function TodoItem(props) {
   return (
-    <div className="bg-white flex items-center justify-between p-2 mb-2 w-full h-12 shadow-md rounded-md"
+    <div className="bg-white flex items-center justify-between p-2 mb-2 w-full h-12 shadow-md rounded-md text-zinc-800"
       data-cy={`todo-item-${props.todo?._id}`}
     >
       <h2 className="text-lg opacity-85">{props.todo?.name}</h2>
