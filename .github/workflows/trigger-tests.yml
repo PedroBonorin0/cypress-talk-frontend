@@ -20,8 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: log
-        run: echo $CYPRESS
+      - name: log1
+        run: echo $CYPRESS - ${{ secrets.CYPRESS }}
+
+      - name: log2
+        run: echo $CYPRESS_RECORD_KEY - ${{ secrets.CYPRESS_RECORD_KEY }}
 
       - name: Set Envs
         run: echo $CYPRESS > ./cypress.env.json
