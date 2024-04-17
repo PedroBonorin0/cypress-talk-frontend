@@ -20,6 +20,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: log
+        run: echo $CYPRESS
+
       - name: Set Envs
         run: echo $CYPRESS > ./cypress.env.json
 
