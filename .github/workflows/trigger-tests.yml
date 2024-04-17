@@ -3,6 +3,9 @@ name: Cypress Tests
 on:
   workflow_dispatch:
 
+env:
+  CYPRESS: ${{ secrets.CYPRESS }}
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -15,6 +18,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set Envs
+        run: echo $CYPRESS > ./cypress.env.json
+
+      - name: Install
+        run: npm install
 
       - name: Cypress run        
         uses: cypress-io/github-action@v6
