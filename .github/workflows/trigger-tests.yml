@@ -10,6 +10,7 @@ env:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    environment: env-geral
 
     strategy:
       fail-fast: false
