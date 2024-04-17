@@ -7,25 +7,40 @@ env:
   CYPRESS: ${{ secrets.CYPRESS }}
 
 jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        containers: [1, 2]
-
+  install:
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set Envs
-        run: echo $CYPRESS > ./cypress.env.json
+      - name: Cypress install
+        uses: cypress-io/github-action@v6
+        with:
+          # Disable running of tests within install job
+          runTests: false
+          build: npm run build
 
-      - name: Install
-        run: npm install
+      - name: Save build folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
 
-      - name: Cypress run        
+  cypress-run:
+    runs-on: ubuntu-22.04
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download the build folder
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: build
+
+      - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           start: npm start
