@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set Envs
-        run: echo ${{ secrets.CYPRESS }} > ./cypress.env.json
+        run: echo $CYPRESS > ./cypress.env.json
 
       - name: Cypress run        
         uses: cypress-io/github-action@v6
