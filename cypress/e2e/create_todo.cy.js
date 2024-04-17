@@ -1,7 +1,7 @@
 describe('Creation', () => {
   before(() => {
     cy.intercept('GET', '/api/todos/*').as('fetchTodos');
-    cy.visit('http://localhost:3000');
+    cy.visit(Cypress.env('base_front'));
     cy.wait('@fetchTodos');
   });
 

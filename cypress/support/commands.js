@@ -2,7 +2,7 @@ Cypress.Commands.add('visitAndCreateTodo', () => {
   cy.intercept('GET', '/api/todos/*').as('fetchTodos');
   cy.intercept('POST', '/api/todos').as('createTodo');
 
-  cy.visit('http://localhost:3000');
+  cy.visit(Cypress.env('base_front'));
   cy.wait('@fetchTodos');
 
   cy.get('[data-cy="todo-input"]').type('Automated todo');
